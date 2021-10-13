@@ -26,7 +26,29 @@ function init(){
 }
 
 function get_color(depth){
-  return "rgb(0,255,0)";
+  // I used this web site to get the colors
+  // https://www.google.com/search?client=firefox-b-1-d&q=color+picker
+
+  var color = "rgb(0,255,0)";
+  if (depth <= 10) {
+    color = "rgb(0,255,0)";
+  }
+  else if (depth > 10 && depth <= 30) {
+    color = "rgb(200,209,67)";
+  }
+  else if (depth > 30 && depth <= 50) {
+    color = "rgb(237,192,95)";
+  }
+  else if (depth > 50 && depth <= 70) {
+    color = "rgb(230,154,83)";
+  }
+  else if (depth > 70 && depth <= 90) {
+    color = "rgb(277,98,43)";
+  }
+  else if (depth > 90 ) {
+    color = "rgb(204,19,6)";
+  }
+  return color;
 }
 function get_size(mag){
   //Make size a multiple 5 of magnitude
