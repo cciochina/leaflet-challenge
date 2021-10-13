@@ -25,6 +25,14 @@ function init(){
   })
 }
 
+function get_color(depth){
+  return "rgb(0,255,0)";
+}
+function get_size(mag){
+  //Make size a multiple 5 of magnitude
+  return mag*5;
+}
+
 function procces_data(data) {
   //console.log(data);
   var markers=[];
@@ -40,8 +48,21 @@ function procces_data(data) {
     
     //I need depth to set the color for the marker
     var depth = item.geometry.coordinates[2];
+    
+    // Get the color based on depth
+    var color = get_color(depth);
+    var size = get_size(mag);
+
+    var marker_properties = {
+      radius: size,
+      fillColor: color,
+      color: "black",
+      weight: 1,
+      opacity: 1,
+      fillOpacity: 0.8,
+    };
     //console.log(lat_lng);
-    var marker = L.marker(lat_lng).bindPopup(`<h3>${place}</h3><hr><p>${new Date(time)}</p>`);
+    var marker = L.circleMarker(lat_lng,marker_properties).bindPopup(`<h3>${place}</h3><hr><p>${new Date(time)}</p>`);
     markers.push(marker);
   
   });
