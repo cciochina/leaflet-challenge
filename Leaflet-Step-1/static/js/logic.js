@@ -41,22 +41,12 @@ function procces_data(data) {
     //I need depth to set the color for the marker
     var depth = item.geometry.coordinates[2];
     //console.log(lat_lng);
+    var marker = L.marker(lat_lng).bindPopup(`<h3>${place}</h3><hr><p>${new Date(time)}</p>`);
+    markers.push(marker);
   
   });
-  // Define a function that we want to run once for each feature in the features array.
-  // Give each feature a popup that describes the place and time of the earthquake.
-  function onEachFeature(feature, layer) {
-    layer.bindPopup(`<h3>${feature.properties.place}</h3><hr><p>${new Date(feature.properties.time)}</p>`);
-  }
-
-  // Create a GeoJSON layer that contains the features array on the earthquakeData object.
-  // Run the onEachFeature function once for each piece of data in the array.
-  var earthquakes = L.geoJSON(data, {
-    onEachFeature: onEachFeature
-  });
-
-  // Send our earthquakes layer to the createMap function/
-  createMap(earthquakes);
+ // console.log(markers);
+ createMap(L.layerGroup(markers));
 }
 
 // Create map, reference the last activity from Day_01
