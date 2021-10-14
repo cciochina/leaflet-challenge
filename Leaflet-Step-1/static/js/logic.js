@@ -130,7 +130,37 @@ function createMap(earthquakes) {
   L.control.layers(baseMaps, overlayMaps, {
     collapsed: false
   }).addTo(myMap);
+add_legend(myMap);
+}
 
+// referenced this web site
+// https://www.igismap.com/legend-in-leafletjs-map-with-topojson/
+function add_legend(map) {
+  // add legend to the map
+  var legend = L.control({position: "bottomright"})
+  var labels = [];
+
+  legend.onAdd = function(map) {
+      var div = L.DomUtil.create('div', 'info legend'),
+      grades = ["-10-10", "10-30", "30-50", "50-70", "70-90", "90+"],
+      colors = ["rgb(0, 255, 0)",
+                  "rgb(200, 209, 67)",
+                  "rgb(237, 192, 95)",
+                  "rgb(230, 154, 83)",
+                  "rgb(227, 98, 43)",
+                  "rgb(204, 19, 6)"
+               ]
+
+  grades.forEach((element, index) => {
+      div.innerHTML += 
+      labels.push(
+          '<i class="circle" style="background:' + colors[index] + '"></i> ' +
+      (element ? element : '+'));
+  });
+  div.innerHTML = labels.join('<br>');
+  return div;
+};
+  legend.addTo(map);
 }
 
 
